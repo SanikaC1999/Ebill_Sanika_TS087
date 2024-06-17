@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBILL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="./images/logo.webp" type="image/x-icon">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .btn-outline-secondary,
+        .btn-explore {
+            background-color: #6c63ff;
+            color: #ffffff;
+            border-color: #6c63ff;
+        }
+
+        .btn-outline-secondary:hover,
+        .btn-explore:hover {
+            background-color: #ffffff;
+            color: #6c63ff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #6c63ff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: blue;
+            border-radius: 5px;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            text-align: center;
+            color: #6c63ff;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .toggle-box {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .container-custom {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding-top: 0px;
+            /* To account for the fixed navbar */
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-title {
+            margin-bottom: 10px;
+        }
+
+        .form-image {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        .form-options .option img {
+            width: 50px;
+            height: 40px;
+        }
+
+        .about-us-section {
+            padding: 40px 0;
+        }
+
+        .about-us-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-us-section p,
+        .about-us-section ul {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .about-us-section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .about-us-section ul li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 576px) {
+            .toggle-box {
+                width: 90%;
+                /* Adjust width for smaller screens */
+                right: 5%;
+                /* Center the box on small screens */
+            }
+        }
+
+        @media (min-width: 577px) and (max-width: 768px) {
+            .toggle-box {
+                width: 70%;
+                /* Adjust width for medium screens */
+                right: 15%;
+                /* Center the box on medium screens */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .toggle-box {
+                width: 300px;
+                /* Set a fixed width for larger screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="./images/logo.webp" alt="" width="30" height="30" class="d-inline-block align-text-top rounded-circle me-2">
+                <h5 class="d-flex align-items-center" style="color: #6c63ff;">EBILL</h5>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="./index1_afterLogin.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="./PaymentBill.html">PAYMENT BILL</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">CONTACT US</a>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-secondary ms-2 btn-explore" type="button" id="toggleButton" onclick="logout()">LOGOUT</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toggle box -->
+    <!-- <div class="toggle-box" id="toggleBox">
+        <div class="card mt-3">
+            <div class="card-body align-items-center">
+                <p>Already a Ebill customer?</p>
+                <a href="./Login.html"><button class="btn btn-outline-secondary rounded-pill ps-3 pe-3" type="button">LOGIN</button></a>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body align-items-center">
+                <button class="btn btn-outline-secondary rounded-pill ps-3 pe-3" type="button">LOGIN AS ADMIN</button>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Main Section -->
+    <div class="d-flex flex-column justify-content-center align-items-center container-custom mt-5 mb-5">
+        <div class="form-container mt-5 mb-5" id="formContainer">
+            <img src="./images/logo.webp" alt="Ebill Logo" class="form-image rounded-circle">
+            <div class="form-options">
+                <div class="option d-flex align-items-center">
+                    <img src="./images/elogo.webp" alt="New Electricity Connections">
+                    <div>New Electricity Connections</div>
+                </div>
+            </div>
+            <div class="form-container">
+                <form id="connectionForm" action="submit_meter_connection.php" method="post">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="contactNumber" class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" id="contactNumber" name="contactNumber" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="aadharCard" class="form-label">Aadhar Card Number</label>
+                            <input type="text" class="form-control" id="aadharCard" name="aadharCard" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" name="address" rows="2" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="meterType" class="form-label">Meter Type</label>
+                            <select class="form-select" id="meterType" name="meterType" required>
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="industrial">Industrial</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="installationDate" class="form-label">Preferred Installation Date</label>
+                            <input type="date" class="form-control" id="installationDate" name="installationDate" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="additionalNotes" class="form-label">Additional Notes</label>
+                            <textarea class="form-control" id="additionalNotes" name="additionalNotes" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" id="checkStatusButton" class="btn btn-primary disabled">Check Status</button>
+                </form>
+            </div>
+        </div>
+        <div class="form-container mt-5 mb-5" id="statusContainer" style="display:none;">
+            <h5>Application Status</h5>
+            <table class="table table-bordered" id="statusTable">
+                <thead>
+                    <tr>
+                        <th>Connection Type</th>
+                        <th>Name</th>
+                        <th>Preferred Date</th>
+                        <th>Contact Number</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Contact Us Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel" style="color: #6c63ff;">Contact Us</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Feedback/Complaint</label>
+                            <textarea class="form-control" id="message" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="background-color: #6c63ff; border-color: #6c63ff;">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 EBILL. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle box
+        // document.getElementById('toggleButton').addEventListener('click', function(event) {
+        //     event.stopPropagation();
+        //     var toggleBox = document.getElementById('toggleBox');
+        //     toggleBox.style.display = toggleBox.style.display === 'none' || toggleBox.style.display === '' ? 'block' : 'none';
+        // });
+
+        // // Hide toggle box when clicking outside
+        // document.addEventListener('click', function(event) {
+        //     var toggleBox = document.getElementById('toggleBox');
+        //     var toggleButton = document.getElementById('toggleButton');
+        //     if (!toggleBox.contains(event.target) && !toggleButton.contains(event.target)) {
+        //         toggleBox.style.display = 'none';
+        //     }
+        // });
+
+        // Store form data in local storage array
+        document.getElementById('connectionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = {
+                fullName: document.getElementById('fullName').value,
+                contactNumber: document.getElementById('contactNumber').value,
+                email: document.getElementById('email').value,
+                aadharCard: document.getElementById('aadharCard').value,
+                address: document.getElementById('address').value,
+                meterType: document.getElementById('meterType').value,
+                installationDate: document.getElementById('installationDate').value,
+                additionalNotes: document.getElementById('additionalNotes').value,
+                status: 'Pending'
+            };
+            var formDataArray = JSON.parse(localStorage.getItem('formDataArray')) || [];
+            formDataArray.push(formData);
+            localStorage.setItem('formDataArray', JSON.stringify(formDataArray));
+            alert('Form data saved to local storage!');
+            updateStatusButton();
+        });
+
+        // Store contact form data in local storage
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var contactData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            localStorage.setItem('contactData', JSON.stringify(contactData));
+            alert('Contact form data saved to local storage!');
+        });
+
+        // Activate check status button if data is available
+        function updateStatusButton() {
+            var formDataArray = JSON.parse(localStorage.getItem('formDataArray')) || [];
+            var checkStatusButton = document.getElementById('checkStatusButton');
+            if (formDataArray.length > 0) {
+                checkStatusButton.classList.remove('disabled');
+            } else {
+                checkStatusButton.classList.add('disabled');
+            }
+        }
+
+        // Load form data from local storage and display table
+        document.getElementById('checkStatusButton').addEventListener('click', function() {
+            var formDataArray = JSON.parse(localStorage.getItem('formDataArray')) || [];
+            if (formDataArray.length > 0) {
+                document.getElementById('formContainer').style.display = 'none';
+                var statusContainer = document.getElementById('statusContainer');
+                statusContainer.style.display = 'block';
+                var statusTableBody = document.getElementById('statusTable').querySelector('tbody');
+                statusTableBody.innerHTML = '';
+                formDataArray.forEach(function(data, index) {
+                    var row = statusTableBody.insertRow();
+                    row.insertCell(0).innerText = data.meterType;
+                    row.insertCell(1).innerText = data.fullName;
+                    row.insertCell(2).innerText = data.installationDate;
+                    row.insertCell(3).innerText = data.contactNumber;
+                    row.insertCell(4).innerText = data.status;
+                });
+            }
+        });
+
+        // Initialize
+        updateStatusButton();
+
+            // Logout function
+    function logout() {
+        localStorage.removeItem('formDataArray');
+        localStorage.removeItem('contactData');
+        alert('You have been logged out!');
+        window.location.href = './Login.html'; // Redirect to the login page
+    }
+    </script>
+</body>
+
+</html>
